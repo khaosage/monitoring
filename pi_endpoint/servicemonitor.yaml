@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: pi-endpoint
+  labels:
+    app: pi-endpoint
+    release: prometheus-operator
+spec:
+  selector:
+    matchLabels:
+      app: pi-endpoint
+      release: prometheus-operator
+  namespaceSelector:
+    matchNames:
+    - monitoring
+  endpoints:
+  - port: web
+    interval: 10s
+    honorLabels: true
